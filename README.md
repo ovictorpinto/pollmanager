@@ -25,7 +25,7 @@ The project are using H2 to persist data. So, every time you shutdown the server
 
 The project use a common MVC pattern, separating views (resorces/templates), controllers, models and i like to use business classes to manager business rules. Its ease to create test for each rule and can be reused if necessary. And two more packages: exception and helper, their names are auto explainable
 
-In business classes, i put some comments where can be added some rules if are requisited by the 'client'
+In business classes, i put some comments where can be added some rules if are requested by the 'client'
 
 # Build
 
