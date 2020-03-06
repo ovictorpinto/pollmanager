@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>List Poll</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/poll.css">
+</head>
+<body>
+<div class="container main-container">
+    <a th:if="${sessionHelper.isLogged()}" class="btn btn-primary" th:href="${#mvc.url('PC#loadCreate').build()}">New Poll</a> <a
+        th:unless="${sessionHelper.isLogged()}" class="btn btn-primary" th:href="${#mvc.url('UC#loadLogin').build()}">Login</a> <a
+        th:unless="${sessionHelper.isLogged()}" class="btn btn-primary" th:href="${#mvc.url('UC#loadSignup').build()}">Sign up</a> <a
+        th:if="${sessionHelper.isLogged()}" class="btn btn-danger" th:href="${#mvc.url('UC#logout').build()}">Logout </a>
+    <a th:if="${sessionHelper.isLogged()}" th:text="${' User: '+ sessionHelper.userLogged.username}" style="text-align: right"></a>
+
+    <br><br>
+
+    <h1>Pools</h1>
+    <h2 th:unless="${sessionHelper.isLogged()}">You need login to see your polls</h2>
+    <table class="table table-bordered" th:if="${sessionHelper.isLogged()}">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="poll : ${pollList}">
+            <td th:text="${poll.title}"></td>
+            <td><a th:href="${#mvc.url('PC#loadEdit').arg(0, poll.id).build()}">Edit</a> <a
+                    target="_blank" th:href="${'/poll/vote/'+ poll.getIdHashed()}">Share</a> <a
+                    th:href="${#mvc.url('PC#loadResponse').arg(0, poll.id).build()}">Responses</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+</html>

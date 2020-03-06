@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Create Poll</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/poll.css">
+</head>
+<body>
+<div class="container  main-container">
+    <br><br>
+
+    <h1>Pool</h1>
+
+    <form th:action="@{/poll/create}" th:object="${poll}" method="post" class="form">
+        <input type="hidden" th:field="*{id}" th:value="${id}"/>
+        Title: <input type="text" th:field="*{title}"/><br>
+        Description: <input type="text" th:field="*{description}"/><br>
+        Need auth for response: <input type="checkbox" th:field="*{needAuth}"/><br><br>
+
+        Options: <a href="#" class="btn btn-sm btn-primary btn-add"> + </a> <br>
+        <div id="box-options">
+            <th:block th:each="item : ${poll.itemList}">
+                <div>
+                    <input type="text" name="itens" th:value="${item.description}"/> <a
+                        href="#" class="btn btn-sm btn-danger btn-remove"> - </a>
+                    <br>
+                </div>
+            </th:block>
+        </div>
+        <br>
+        <input  th:if="${!poll.isHasResponse()}"  type="submit" value="Save" class="btn btn-success"/>
+        <a class="btn btn-primary" th:href="${#mvc.url('PC#index').build()}">Back</a>
+        <a th:if="${poll.isHasResponse()}">Not allowed edit responded poll </a>
+    </form>
+
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+<script>
+    function remove(evt) {
+        let btnMinus = evt.target;
+        let divField = btnMinus.parentNode;
+        divField.remove();
+    }
+    function addEventRemove(){
+        let btnList = document.querySelectorAll(".btn-remove");
+        for (let btn of btnList) {
+            btn.addEventListener("click", remove, false);
+        }
+    }
+    function add() {
+        let box = document.querySelector("#box-options");
+        let newField = document.createElement("div");
+        newField.innerHTML = `<input type='text' name='itens'/> <a href='#' class='btn btn-sm btn-danger btn-remove'> - </a><br>`;
+        box.append(newField);
+        addEventRemove();
+    }
+    function addEventAdd(){
+        document.querySelector(".btn-add").addEventListener("click", add, false);
+    }
+    function load() {
+        addEventAdd();
+        addEventRemove();
+    }
+    document.addEventListener("DOMContentLoaded", load, false);
+
+</script>
+</body>
+</html>

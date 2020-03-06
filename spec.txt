@@ -1,0 +1,21 @@
+Here's the take home test. We'd like this code to be run locally. Let me know if you have any feedback, or if you or he have questions.
+
+Desired features, in order of priority:
+
+ok A user can come to the webpage and create a new poll.
+ok The user should be able to specify a title for the poll, a brief description, and a list of options.
+ok After the poll is created, the user should be able to edit the poll, and modify anything they specified originally.
+ok After the poll is created, the user should be able to share their poll with their friends. This can be as simple as generating a link that they can have other people go to to respond to the poll.
+ok The user should be able to view a graph of the responses to their poll.
+=/ A user responding to a poll should be able to edit their response. (You do not need to authenticate users attempting to edit responses)
+ok A user should be able to create an account that they can authenticate to with a username and password.
+ok The only information you need is a username and password. If email addresses are usernames, you do not need to validate the email address.
+ok Passwords must be securely stored. Rate-limiting of authentication requests and account lockout do not need to be implemented.
+=/ A user should be able to associate all of their previously created polls with that account.
+ok The user, when authenticated, should be able to view all of the polls associated with their account.
+ok The user should be able to require all respondents to their polls authenticate before being able to respond to the poll.
+
+
+Road map
+- token/cookie for poll
+- associate polls with account
