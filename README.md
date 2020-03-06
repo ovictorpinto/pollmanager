@@ -15,11 +15,11 @@ The project consist in a test to simulate a poll manager
 
 # Work
 
-This version dont acomplished topics about create poll or edit response use without be logged.
+In this version the user only can create poll if he are logged. Was a decision to be able to complete more items of the requested topics in the proposed time. Some validation of authorization need to be added. Exists frameworks that make this work, like Spring Security 
 
 I choose Spring Boot because is a simple framework to generated a webserver without need to install Tomcat, JBoss or Wildfly.
 
-The project are using H2 to persiste data. So, every time you shutdown the server all data will be lost. If its necessary use a MySQL, just configure commented lines in application.properties file in resources dir
+The project are using H2 to persist data. So, every time you shutdown the server all data will be lost. If its necessary use a MySQL, just configure commented lines in application.properties file in resources dir
 
 # Structure
 
@@ -47,4 +47,4 @@ java -jar target/pollmanager-0.0.1-SNAPSHOT.jar
 
 Make sure the port 8080 are free
 
-Open your favorite browser and access the [link](htt://localhost:8080)
+Open your favorite browser and access the [link](http://localhost:8080)
